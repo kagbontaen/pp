@@ -34,11 +34,11 @@ test = pd.read_csv('kaggle\input\Test_data.csv')
 train
 
 train.info()
-train.head()
+train.head(1)
 train.describe()
 train.describe(include='object')
-#tmp=train.corr()
 
+#check for data with missing values in code
 total = train.shape[0]
 missing_columns = [col for col in train.columns if train[col].isnull().sum() > 0]
 for col in missing_columns:
@@ -46,6 +46,20 @@ for col in missing_columns:
     per = (null_count / total) * 100
     print(f"{col}: {null_count} ({round(per, 3)}%)")
 
-import plotly.express as px
-fig = px.imshow(train, text_auto=True, aspect="auto")
-fig.show()
+#check for duplicated data witin the dataset
+print(f"Number of duplicate rows: {train.duplicated().sum()}")
+#train.corr()
+# import plotly.express as px
+# fig = px.imshow(train, text_auto=True, aspect="auto")
+# fig.show()
+
+for col in df:
+    if col != 'class' and is_numeric_dtype(df[col]):
+        fig, ax = plt.subplots(2, 1, figsize=(12, 8))
+        g1 = sns.boxplot(x = df[col], ax=ax[0])
+        g2 = sns.scatterplot(data=df, x=df[col],y=df['class'], ax=ax[1])
+        plt.show()
+
+
+
+
