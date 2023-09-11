@@ -656,7 +656,7 @@ data = [["*KNN", f"{KNN_train*100:.2f}%", f"{KNN_test*100:.2f}%"],
         ["*Baggings", f"{bag_train*100:.2f}%", f"{bag_test*100:.2f}%"],
         ["*SVM", f"{SVM_train*100:.2f}%", f"{SVM_test*100:.2f}%"]]
 data.sort()
-
+data.append(["sm",f])
 col_names = ["Model", "Train Score", "Test Score"]
 print(tabulate(data, headers=col_names, tablefmt="fancy_grid"))
 
